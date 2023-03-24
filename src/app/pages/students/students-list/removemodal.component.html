@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<button class="close" mat-button (click)="onNoClick()">X</button>
+<div mat-dialog-content>
+  {{content}}
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button mat-dialog-close [image]="'./assets/images/cross.svg'">Cancel</app-button>
+  <!--<button mat-button mat-dialog-close cdkFocusInitial (click)="onDelete()">Delete</button>-->
+  <app-button mat-button mat-dialog-close cdkFocusInitial [title]="'Delete Student'" [theme]="'danger'" [image]="'./assets/images/bin_white.svg'" (click)="onDelete()">Delete</app-button>
+</div>
+

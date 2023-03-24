@@ -1,0 +1,82 @@
+.mat-dialog-actions {
+  padding: 0px 16px 0px 120px;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 52px;
+  align-items: center;
+  margin-bottom: -24px;
+  justify-content: center;
+  justify-content: space-between;
+}
+
+.mat-dialog-content {
+  padding: 42px 24px 16px !important;
+  font-size:28px;
+  text-align:center;
+  font-weight:600;
+}
+
+
+
+  .mat-dialog-content > div {
+    margin-bottom: 30px;
+    display: flex;
+  }
+
+
+.mat-dialog-title {
+  margin: 0px;
+  font-size: 33px;
+  text-align: center;
+}
+.sub-title {
+  font-size: 19px;
+  text-align: center;
+  cursor:pointer;
+}
+.is-email .mat-dialog-title,
+.is-email .sub-title {
+  color: #4D6F91;
+}
+
+textarea {
+  width: 620px;
+  height: 270px;
+}
+
+input {
+  width: 620px;
+  height: 53px
+}
+
+label{ 
+    text-align:left;
+    font-size:23px;
+    margin-top:10px;
+    width:120px;
+}
+
+.is-email .mat-dialog-content label {
+  color: var(--ng-primary-accent-color)
+}
+
+
+.close.mat-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #fff;
+  padding: 5px;
+  line-height: 14px;
+  min-width: auto;
+  width: 64px;
+  height: 64px;
+}
+
+
+input, textarea {
+  font-family: sans-serif;
+  color: #9FAFC3;
+  font-size: 19px;
+}
+

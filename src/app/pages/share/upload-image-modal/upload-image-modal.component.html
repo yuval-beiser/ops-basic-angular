@@ -1,0 +1,16 @@
+<div class="upload-image-modal">
+  <div *ngIf="student?.profilePicture" class="current-image">
+    <span>Current Picture</span>
+    <img  [src]="student.profilePicture" />
+  </div>
+  <div class="title">Change Picture Student</div>
+  <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+    <ngx-dropzone-label>Drop files here or click to upload</ngx-dropzone-label>
+    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </ngx-dropzone>
+  <div class="footer-action">
+    <app-button  (click)="onUpdatePicture()" [disabled]="!files.length">Update Student Profile Picture</app-button>
+  </div>
+</div>

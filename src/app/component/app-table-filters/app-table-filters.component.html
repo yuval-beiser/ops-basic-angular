@@ -1,0 +1,51 @@
+<div class="table-filters" @animation>
+  <div class="item1">
+    <div class="table-filters__item name">
+      <label>Name</label>
+      <input type="text" [(ngModel)]="filters.name" />
+    </div>
+    <div class="table-filters__item date">
+      <label>Date Of Birth Range</label>
+      <div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="fromDate" [(ngModel)]="filters.fromDate">
+          <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+
+        <span>To</span>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="topicker" [(ngModel)]="filters.toDate">
+          <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+          <mat-datepicker #topicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="item1">
+    <div class="table-filters__item score">
+      <label>SAT Sore</label>
+      <div>
+        <input id="fromSat" type="number" [(ngModel)]="filters.fromSat" />
+        <span>To</span>
+        <input id="toSat" type="number" [(ngModel)]="filters.toSat" />
+      </div>
+    </div>
+    <div>
+      <div class="table-filters__item score">
+        <label>Avg Score</label>
+        <div>
+          <input id="fromAvg" type="number" [(ngModel)]="filters.fromAvg" />
+          <span>To</span>
+          <input id="toAvg" type="number" [(ngModel)]="filters.toAvg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-filters__action">
+    <app-button [title]="'Apply'" (click)="onApply($event)">Apply</app-button>
+    <app-button [title]="'Cancel'" [theme]="'black'" (click)="onClearAll($event)">Clear All</app-button>
+  </div>
+</div>
+

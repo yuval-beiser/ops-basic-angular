@@ -1,0 +1,346 @@
+.student-profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  padding: 45px;
+
+  input {
+    border: 1px solid #86a8e0;
+  }
+
+  input, select, textarea {
+    color: #000;
+  }
+
+  .student-profile-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid #dce6f6;
+  }
+
+  &__left-side {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: var(--ng-third-light-color);
+    padding: 60px 0px;
+
+    &__student-data {
+      padding: 0px 45px;
+
+      &__picture {
+        display: flex;
+
+        img {
+          border-radius: 50%;
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      .change-photo-wrapper {
+        display: flex;
+        font-size: 18px;
+
+        i {
+          font-size: 18px
+        }
+      }
+
+      &__name {
+        font-size: 26px;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+
+      &__email {
+        font-size: 14px;
+        color: #8ea0b8;
+      }
+
+      &__action {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 45px;
+        margin-bottom: 60px;
+        border: 1px solid #baceed;
+
+        & > div {
+          display: flex;
+          flex-direction: column;
+          width: inherit;
+          height: 150px;
+          background-color: #fff;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+
+          &:nth-child(2) {
+            background-color: #7699cf;
+            color: #fff;
+          }
+
+          img, i {
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+
+      app-button {
+        width: 250px;
+      }
+    }
+  }
+
+  &__right-side {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    background-color: var(--ng-fourth-light-color);
+    padding: 60px 45px;
+
+    &__section {
+      /* display: flex;
+      flex-direction: row;*/
+      margin-bottom: 20px;
+
+      &__title, &__content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+        flex: auto;
+        margin-bottom: 30px;
+
+        .date-label {
+          left: 25px;
+          position: relative;
+        }
+
+        mat-form-field {
+          padding: 10px;
+          height: 43px;
+          width: 246px;
+          background: #FFFFFF 0% 0% no-repeat padding-box;
+          border: 1px solid #86A8E0;
+          border-radius: 5px;
+          padding-right: 35px;
+        }
+
+
+        .header {
+          color: #4d6f91;
+          font-size: 18px;
+          font-weight: 600;
+        }
+
+        label {
+          color: #86a8e0;
+          font-weight: 600;
+          margin-right: 20px;
+          align-items: center;
+          display: flex;
+          width: 100px;
+        }
+
+        & > div {
+          display: flex;
+        }
+
+
+        .avg-grade {
+          span:first-child {
+            font-size: 114px;
+            color: #4d6f91;
+          }
+
+          span:last-child {
+            color: #82a4da;
+            font-size: 50px;
+          }
+        }
+      }
+    }
+
+    &__grade_section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    &__footer {
+      display: flex;
+      align-items: flex-end;
+      flex-direction: row;
+      justify-content: end;
+    }
+  }
+}
+
+
+:host ::ng-deep {
+
+  mat-form-field {
+    width: 246px;
+    height: 43px;
+    background-color: #fff;
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0px !important;
+
+      .mat-form-field-flex {
+        .mat-form-field-infix {
+          padding: 0px !important;
+          margin-top: -15px !important;
+
+          input {
+            top: -10px;
+            position: relative;
+            border: none !important;
+
+            &:hover, &:focus, &:focus-visible {
+              background: transparent !important;
+              color: inherit !important;
+              border: none !important;
+            }
+          }
+        }
+      }
+    }
+
+    .mat-datepicker-toggle {
+      top: -20px;
+      position: relative;
+      right: -25px;
+    }
+  }
+
+  .mat-form-field-underline {
+    display: none !important;
+  }
+
+  app-button.custom-button {
+    button {
+      min-width: 60px !important;
+      color: #fff !important;
+    }
+
+    &.bin {
+      button {
+        background-color: #ec3335 !important;
+      }
+    }
+  }
+
+}
+
+
+@media screen and (max-width: 450px) {
+
+  :host ::ng-deep {
+
+    app-button.custom-button {
+      width: 100%;
+
+      button[theme] {
+        height: 75px !important;
+        width: 100% !important;
+
+        img {
+          width: 28px;
+        }
+      }
+    }
+
+    .course-grades__wrapper {
+
+      input.course-name {
+        width: 225px !important;
+      }
+    }
+
+  }
+  .student-profile-wrapper {
+    flex-direction: column !important;
+  }
+
+  .student-profile {
+    padding: 0px !important;
+    top: -10px;
+    position: relative;
+
+    &__left-side {
+      width: 100%;
+      background-color: #fff;
+      padding: 0px;
+
+      &__student-data {
+        display: flex;
+        flex-direction: row;
+        background-color: var(--ng-third-light-color);
+
+        .change-photo-wrapper {
+          display: none;
+        }
+
+        &__action {
+          margin: 0px;
+          height: 75px !important;
+
+          & > div {
+            height: 75px !important;
+
+            img {
+              width: 28px;
+              height: 28px;
+            }
+          }
+        }
+      }
+    }
+
+    &__right-side {
+      width: 100%;
+      padding: 30px;
+
+      &__section {
+
+        &__title {
+          gap: 110px;
+        }
+
+        &__content {
+          flex-direction: column;
+
+          .date-label {
+            left: 0px;
+          }
+
+          mat-form-field {
+            width: 240px;
+
+            &.date{
+                width:260px;
+            }
+          }
+        }
+      }
+
+      &__grade_section{
+          flex-direction:column;
+          gap:0px;
+      }
+    }
+  }
+}

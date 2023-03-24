@@ -1,0 +1,9 @@
+<button (click)="onClick($event)" [disabled]="disabled" [attr.is-loading]="isLoading" [attr.bold]="isBold"
+        [attr.icon]="icon ? true : false" [attr.theme]="theme"
+        [attr.type]="type">
+  <ng-container *ngIf="!isLoading">
+    <img  class="dr" [src]="image" [ngClass]="imgClass" />
+    <ng-content>
+    </ng-content>
+  </ng-container>
+</button>

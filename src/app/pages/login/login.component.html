@@ -1,0 +1,78 @@
+<div class="body" [ngClass]="{'mobile': isMobile}">
+  <div class="left-side">
+    <form [formGroup]="loginForm" class="form" (ngSubmit)="onLogin()">
+      <!--<div class="form">-->
+        <div class="form__content">
+          <div class="form__content__header">
+            <img class="rocket" src="./assets/images/login page rocket image.svg" />
+            <h1 class="form__content__heading">Coding Bootcamp Student System</h1>
+            <!--<div class="form__content__description">
+              Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing
+            </div>-->
+          </div>
+          <div class="form__field">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <img src="./assets/images/account.svg" height="22" width="18" />
+              </span>
+              <input class="form__input" type="email"  formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Username is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form__field">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <img src="./assets/images/lock-icon.svg" height="22" width="18" />
+              </span>
+              <input type="password" formControlName="password" class="form__input" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form__field form__submit">
+            <app-button [title]="'Log in to your Account'" [type]="'submit'" (click)="onLogin()">Log in to your Account</app-button>
+
+          </div>
+        </div>
+        <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+          {{errorMsg}}
+        </div>
+      <!--</div>-->
+    </form>
+  </div>
+  <div *ngIf="!isMobile" class="right-side">
+
+    <div class="cta">
+      <div class="cta__content">
+        <p>Best Platform for you to learn coding</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="login">
+  <div class="login-form">
+    <form>
+      <h5 class="head-txt">ברוכים הבאים</h5>
+      <div class="login-form-input">
+        <label for="">שם משתמש</label>
+        <input type="text" class="form-control" name="username" [(ngModel)]="user.username" autocomplete="new-user"
+               placeholder="הזן שם משתמש"/>
+      </div>
+      <div class="login-form-input">
+        <label for="">סיסמא</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="user.password" autocomplete="new-password"
+               placeholder="הזן סיסמא"/>
+      </div>
+      <div class="login-form-input">
+        <button (click)="onLogin()" [disabled]="user.username === '' || user.password === ''">כניסה</button>
+      </div>
+      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
+        {{errorMsg}}
+      </div>
+    </form>
+  </div>
+</div>-->

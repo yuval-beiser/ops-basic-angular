@@ -1,0 +1,11 @@
+<div class="course-grades">
+  <div class="course-grades__wrapper" *ngFor="let data of grades; let i=index;">
+    <input type="text" class="course-name" placeholder="Course Name" [(ngModel)]="data.courseName" (change)="onChangeCourseName(data)" />
+    <div class="line"></div>
+    <input type="number" class="grade" placeholder="Grade" [(ngModel)]="data.courseScore" (change)="onChangeGrade(data)" style="padding:6px;" min="0" max="100" />
+    <div *ngIf="!data.isAdded" class="add-grade" (click)="onAddGrade(data)"><i class="fa fa-plus" aria-hidden="true"></i></div>
+    <div *ngIf="data.isAdded" class="remove-grade" (click)="onRemoveGrade(data, index)"><i class="fa fa-minus" aria-hidden="true"></i></div>
+  </div>
+</div>
+
+

@@ -1,0 +1,23 @@
+<div class="wrapper" [ngClass]="{'is-sms': data.isSms, 'is-email': !data.isSms}">
+  <h1 mat-dialog-title>{{title}}</h1>
+  <div class="sub-title">{{subTitle}}</div>
+  <button class="close" mat-button [ngClass]="{'is-sms' : data.isSms, 'is-email': !data.isSms}" (click)="onNoClick()">X</button>
+  <div mat-dialog-content >
+    <div>
+      <label>Subject</label>
+      <input type="text" [(ngModel)]="sendMessage.subject" placeholder="Your Subject" />
+    </div>
+    <div>
+      <label>Message</label>
+      <textarea [(ngModel)]="sendMessage.message" placeholder="Your Message"></textarea>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <app-button *ngIf="data.isSms" mat-button cdkFocusInitial (click)="onSend()" [disabled]="!sendMessage.subject || !sendMessage.message" [theme]="'secondary'" [image]="'./assets/images/sms_blue.svg'">Send SMS</app-button>
+    <app-button *ngIf="data.isSms" mat-button mat-dialog-close style=" border: 1px solid #E0ECFF;">Discard</app-button>
+
+    <app-button *ngIf="!data.isSms" mat-button cdkFocusInitial (click)="onSend()" [disabled]="!sendMessage.subject || !sendMessage.message" [image]="'./assets/images/mail_white.svg'">Send Email</app-button>
+    <app-button *ngIf="!data.isSms" mat-button mat-dialog-close [theme]="'secondary'">Discard</app-button>
+  </div>
+</div>
+

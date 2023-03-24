@@ -1,0 +1,161 @@
+<div class="student-list">
+  <div class="student-list__header">
+    <div class="student-list__header__title">
+      Students
+      <div class="student-list__total">Total Students: {{totalStudents}}</div>
+      <div *ngIf="isMobile" class="select-all">
+        <label class="checkbox-form-control">
+          <input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="student-list__header__action">
+      <div *ngIf="countSelectedStudents > 1 || isMobile" class="student-list__header__action__multi">
+        <app-button class="custom-button sms" [title]="'Send sms to students'" [image]="'./assets/images/sms.svg'" (click)="onSend('sms')"></app-button>
+        <app-button class="custom-button mail" [title]="'Send email to students'" [image]="'./assets/images/mail.svg'" (click)="onSend('email')"></app-button>
+        <app-button class="custom-button bin" [title]="'Delete students'" [image]="'./assets/images/bin_white.svg'" (click)="onDeleteStudent()"></app-button>
+      </div>
+      <div class="student-list__header__action__buttons">
+        <app-button *ngIf="!isMobile" [title]="'Filter Student'" [image]="'./assets/images/filter.svg'" (click)="isShowFilter = !isShowFilter">Filter by <i class="fa fa-chevron-right" aria-hidden="true"></i></app-button>
+        <app-button *ngIf="!isMobile" [title]="'Add Student'" [theme]="'ghost'" [image]="'./assets/images/cross_blue.svg'" [imgClass]="'rotate-45'" (click)="onAddStudent()">Add Student</app-button>
+        <app-button *ngIf="isMobile" [title]="'Filter Student'" [image]="'./assets/images/filter.svg'" (click)="isShowFilter = !isShowFilter"></app-button>
+        <app-button *ngIf="isMobile" [title]="'Add Student'" [theme]="'ghost'" [image]="'./assets/images/cross_blue.svg'" [imgClass]="'rotate-45'" (click)="onAddStudent()"></app-button>
+      </div>
+    </div>
+  </div>
+
+
+  <div [hidden]="!isShowFilter" class="student-list__header__filters">
+    <app-table-filters [terms]="terms" (apply)="onApply($event)" (clearAll)="onClearAll($event)"></app-table-filters>
+  </div>
+
+  <div *ngIf="!isMobile && students?.length;">
+    <table class="datatable">
+      <thead>
+        <tr>
+          <th>
+            <label class="checkbox-form-control">
+              <input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)">
+              <span class="checkmark"></span>
+            </label>
+          </th>
+          <th (click)="sortOn('id')">
+            ID <i class='fa fa-sort'></i>
+          </th>
+          <th (click)="sortOn('fullName')">Name <i class='fa fa-sort'></i></th>
+          <th (click)="sortOn('birthDate')">Date of Birth <i class='fa fa-sort'></i></th>
+          <th (click)="sortOn('graduationScore')">Highschool Avg % <i class='fa fa-sort'></i></th>
+          <th (click)="sortOn('satScore')">SAT Score <i class='fa fa-sort'></i></th>
+          <th (click)="sortOn('phone')">Phone <i class='fa fa-sort'></i></th>
+          <th (click)="sortOn('email')">Email <i class='fa fa-sort'></i></th>
+          <th (click)="sortOn('profilepicture')">Pic <i class='fa fa-sort'></i></th>
+          <th (click)="sortOn('avgScore')">Course Avg Grade <i class='fa fa-sort'></i></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students; let i=index;">
+          <td>
+            <label class="checkbox-form-control">
+              <input type="checkbox" value="{{student.id}}" [(ngModel)]="students[i].checked" (change)="onChecked($event)">
+              <span class="checkmark"></span>
+            </label>
+          </td>
+          <td>{{ student.id }}</td>
+          <td (click)="onEditStudent(student.id)" class="pointer">{{ student.fullname }}</td>
+          <td>{{ student.birthdate }}</td>
+          <td>{{ student.graduationscore }}</td>
+          <td>{{ student.satscore }}</td>
+          <td class="center">{{ student.phone }}</td>
+          <td class="center">{{ student.email }}</td>
+          <td class="center"> <img *ngIf="student?.profilePicture" [src]="student.profilePicture" width="36" height="36" /></td>
+          <td>{{ student.avgscore }}</td>
+          <td><i class="fa fa-ellipsis-h" aria-hidden="true" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{context:student}" (contextmenu)="onContextMenu($event, student)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div *ngIf="isMobile && students?.length;">
+    <div *ngFor="let student of students; let i=index;" class="student-data">
+      <div class="student-data__section first">
+        <label class="checkbox-form-control">
+          <input type="checkbox" value="{{student.id}}" [(ngModel)]="students[i].checked" (change)="onChecked($event)">
+          <span class="checkmark"></span>
+        </label>
+        <img [hidden]="!student?.profilePicture" [src]="student.profilePicture" />
+        <div class="student-data__section__data no-margin">
+          <label>ID:</label>
+          <span>{{ student.id }}</span>
+        </div>
+        <div class="action">
+          <i class="fa fa-ellipsis-h" aria-hidden="true" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{context:student}" (contextmenu)="onContextMenu($event, student)"></i>
+        </div>
+      </div>
+      <div class="student-data__section">
+        <div class="student-data__section__data">
+          <label>Name:</label>
+          <span [attr.title]="student.fullname">{{ student.fullname }}</span>
+        </div>
+        <div class="student-data__section__data">
+          <label>D.O.B:</label>
+          <span [attr.title]="student.birthdate">{{ student.birthdate }}</span>
+        </div>
+      </div>
+      <div class="student-data__section">
+        <div class="student-data__section__data">
+          <label>H.S Avg:</label>
+          <span [attr.title]="student.satscore">{{ student.satscore }}</span>
+        </div>
+        <div class="student-data__section__data">
+          <label>Phone:</label>
+          <span [attr.title]="student.phone">{{ student.phone }}</span>
+        </div>
+      </div>
+      <div class="student-data__section">
+        <div class="student-data__section__data">
+          <label>Avg GR.:</label>
+          <span [attr.title]="student.graduationscore">{{ student.graduationscore }}</span>
+        </div>
+        <div class="student-data__section__data">
+          <label>Email:</label>
+          <span [attr.title]="student.email">{{ student.email }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="student-list__pagination" *ngIf="totalPages.length > 1">
+    <div class="student-list__pagination__wrapper">
+      <a [hidden]="currentPage === 0" class="pointer" (click)="onPreviusPage(currentPage - 1)"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+      <a *ngFor="let page of totalPages; let i=index;" class="pointer" [ngClass]="{'selected': currentPage === page + 1}" (click)="onClickPage(page)">
+        <span>{{page + 1}}</span>
+      </a>
+      <a [hidden]="currentPage === totalPages.length" class="pointer" (click)="onNextPage(currentPage + 1)"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu" class="customize-menu">
+  <ng-template matMenuContent let-item="context">
+    <div class="item-wrapper">
+      <button mat-menu-item class="half-item" (click)="onSend('sms', item)">
+        <img src="./assets/images/sms.svg" height="45" width="45" />
+        Send SMS
+      </button>
+      <button mat-menu-item class="half-item" (click)="onSend('email', item)">
+        <img src="./assets/images/mail.svg" height="45" width="45" />
+        Send Email
+      </button>
+    </div>
+    <button mat-menu-item (click)="onEditStudent(item.id)">Edit student profile</button>
+    <button mat-menu-item (click)="onChangePicture(item)">Change student picture</button>
+    <button mat-menu-item class="danger" (click)="onDeleteStudent(item)"><img src="./assets/images/bin.svg" height="22" width="18" /> Delete</button>
+  </ng-template>
+</mat-menu>
+
+
+

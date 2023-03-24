@@ -1,0 +1,32 @@
+.mat-dialog-actions {
+  padding: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 52px;
+  align-items: center;
+  margin-bottom: -24px;
+  justify-content: center;
+  justify-content: space-between;
+}
+
+.mat-dialog-content {
+  padding: 42px 24px 16px !important;
+  font-size:28px;
+  text-align:center;
+  font-weight:600;
+}
+
+.close.mat-button {
+  position: absolute;
+  top: -14px;
+  right: -13px;
+  background-color: #fff;
+  padding: 5px;
+  line-height: 14px;
+  min-width: auto;
+  width: 32px;
+  height: 32px;
+  z-index: 99999;
+  box-shadow: 0px 0px 11px #0000001c;
+  border-radius: 6px;
+}

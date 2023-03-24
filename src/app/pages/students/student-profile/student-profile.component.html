@@ -1,0 +1,121 @@
+<div class="student-profile">
+  <div class="student-profile-wrapper">
+    <div class="student-profile__left-side">
+      <div class="student-profile__left-side__student-data">
+        <div class="student-profile__left-side__student-data__picture">
+          <img *ngIf="student?.profilePicture" [src]="student.profilePicture" />
+          <div class="change-photo-wrapper">
+            <i class="fa fa-pencil" aria-hidden="true" (click)="onChangePicture()"></i>
+            <div>Change Photo</div>
+          </div>
+        </div>
+        <div class="student-profile__left-side__student-data__name">
+          <div>{{student?.fullname}}</div>
+          <div *ngIf="student?.email" class="student-profile__left-side__student-data__email">{{student.email}}</div>
+        </div>
+       
+
+      </div>
+      <div class="student-profile__left-side__student-data__action">
+        <div (click)="onSend('email')">
+          <img src="./assets/images/mail.svg" height="45" width="45" />
+          Send Email
+        </div>
+        <div (click)="onSend('sms')">
+          <img src="./assets/images/sms.svg" height="45" width="45" />
+          Send SMS
+        </div>
+        <div (click)="onSendWhatsapp()">
+          <img src="./assets/images/whatsApp.webp" height="45" width="45" />
+          Send <br />WhatsApp
+        </div>
+        <div *ngIf="isMobile">
+          <app-button class="custom-button bin" [title]="'Delete students'" [image]="'./assets/images/bin_white.svg'" (click)="onDeleteStudent()"></app-button>
+        </div>
+      </div>
+      <div *ngIf="!isMobile" class="student-profile__left-side__footer">
+        <app-button [title]="'Delete Student'" [theme]="'danger'" [image]="'./assets/images/bin_white.svg'" (click)="onDeleteStudent()">Delete</app-button>
+      </div>
+    </div>
+    <div class="student-profile__right-side">
+      <form  [formGroup]="studentForm" (ngSubmit)="onUpdateProfile()">
+        <div class="student-profile__right-side__section">
+          <div class="student-profile__right-side__section__title">
+            <div class="header">Basic</div>
+            <div>
+              <label>Id</label>
+              <input formControlName="id" disabled width="80" />
+            </div>
+          </div>
+          <div class="student-profile__right-side__section__content">
+            <div>
+              <label>Name</label>
+              <input class="form__input" type="text" formControlName="fullname" width="80" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
+            </div>
+            <div>
+              <label class="date-label">D.O.B</label>
+              <mat-form-field class="date">
+                <input matInput [matDatepicker]="birthdatepicker" formControlName="birthdate" (dateChange)="onChangeDetails()">
+                <mat-datepicker-toggle matSuffix [for]="birthdatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #birthdatepicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="student-profile__right-side__section__content">
+            <div>
+              <label>Phone</label>
+              <input type="text" formControlName="phone" width="80" (change)="onChangeDetails()" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+            </div>
+            <div>
+              <label>Email</label>
+              <input type="email"  formControlName="email" width="80" (change)="onChangeDetails()" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            </div>
+          </div>
+
+        </div>
+        <div class="student-profile__right-side__section">
+          <div class="student-profile__right-side__section__title">
+            <div class="header">Grades</div>
+
+          </div>
+          <div class="student-profile__right-side__section__content">
+            <div>
+              <label>H.School Avg%</label>
+              <input type="number"   formControlName="graduationScore" width="80" (change)="onChangeDetails()" [ngClass]="{ 'is-invalid': submitted && f.graduationScore.errors }"/>
+            </div>
+            <div>
+              <label>SAT Score</label>
+              <input type="number"  formControlName="satScore" width="80" (change)="onChangeDetails()" [ngClass]="{ 'is-invalid': submitted && f.satScore.errors }"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="student-profile__right-side__grade_section">
+        <div class="student-profile__right-side__section">
+          <div class="student-profile__right-side__section__title">
+            <div class="header">Course Grades</div>
+          </div>
+          <div class="student-profile__right-side__section__content">
+            <div class="" *ngIf="student">
+              <app-course-grades [student]="student" (courseGrades)="onUpdateGrades($event)"></app-course-grades>
+            </div>
+          </div>
+        </div>
+        <div class="student-profile__right-side__section">
+          <div class="student-profile__right-side__section__title">
+            <div class="header">Course Avarage Grade</div>
+          </div>
+          <div class="student-profile__right-side__section__content">
+            <div class="">
+              <div class="avg-grade"><span>{{avgGrades}}</span><span>%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="student-profile__right-side__footer">
+        <app-button [title]="'Close'" [image]="'./assets/images/cross.svg'" [type]="'submit'" (click)="onUpdateProfile()">Update Profile</app-button>
+        <app-button [title]="'Close'" [theme]="'ghost'" [image]="'./assets/images/cross_blue.svg'" (click)="onClose()">Cancel</app-button>
+      </div>
+    </div>
+    </div>
+  </div>

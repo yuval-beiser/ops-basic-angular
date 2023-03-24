@@ -1,0 +1,71 @@
+<mat-spinner *ngIf="loading" mode="indeterminate"></mat-spinner>
+<!--<router-outlet></router-outlet>-->
+<app-tost [tostMessage]="tostMessage" *ngIf="tostMessage"></app-tost>
+
+<!--navigation menu-->
+<div class="main-view app-container">
+  <mat-toolbar color="default" *ngIf="isUserLogedIn()">
+    <!--<div fxHide.gt-xs>-->
+    <!--<button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sideBarIsOpen = !sideBarIsOpen; drawer.toggle(); " color="secondary">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>-->
+
+    <img class="rocket" src="./assets/images/navigation rocket image.svg" />
+    <div class="search-wrapper">
+
+      <img src="./assets/images/search.svg" height="15" width="15" />
+      <input class="search-input" placeholder="Search" [(ngModel)]="terms" (keyup.enter)="onSearch()" />
+    </div>
+    <span class="spacer"></span>
+
+    <div *ngIf="user" class="user-profile">
+      <span class="user-profile__notifications">
+        <img src="./assets/images/chats.svg" height="15" width="15" />
+        <img src="./assets/images/bell.svg" height="15" width="15" />
+      </span>
+      <img [src]="user.avatar" />
+      <span class="user-profile__name">{{user.name}}</span>
+      <i class="fa fa-caret-down" aria-hidden="true" [matMenuTriggerFor]="menurofile"></i>
+      <mat-menu #menurofile="matMenu" class="profile-menu">
+        <ng-template matMenuContent>
+          <button mat-menu-item>
+            <img src="./assets/images/dark-mode.svg" height="15" width="15" /> Dark Mode
+            <span class="pull-right toggle">
+              <mat-slide-toggle [checked]="isDarkMode ? true : false" (change)="changeDark()"></mat-slide-toggle>
+            </span>
+          </button>
+          <button mat-menu-item (click)="onLogout()"><img src="./assets/images/export.svg" height="15" width="15" /> Sign Out</button>
+        </ng-template>
+      </mat-menu>
+    </div>
+    
+  </mat-toolbar>
+  <mat-toolbar  *ngIf="isMobile"  class="student-section">
+      <a routerLink="/students-list">
+        <img src="./assets/images/students_white.svg" height="16" width="16" />
+        Students
+      </a>
+  </mat-toolbar>
+  <mat-sidenav-container  autosize class="sidenav-container">
+    <mat-sidenav #drawer  *ngIf="!isMobile" class="sidenav"
+                 [attr.role]="'navigation'"
+                 [mode]="'side'"
+                 [(opened)]="isUserLogedIn() && sideBarIsOpen">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/students-list">
+          <img src="./assets/images/students.svg" height="40" width="40" />
+          Students
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content [ngClass]="{'navbar-open': isUserLogedIn() && sideBarIsOpen}">
+
+      <!-- Add Content Here -->
+      <main class="container mar-top-10">
+        <router-outlet>
+        </router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+

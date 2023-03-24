@@ -1,0 +1,48 @@
+.upload-image-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 45px;
+}
+
+.current-image {
+  font-size: 24px;
+  color: #000;
+  letter-spacing: -0.02px;
+  font-weight: 600;
+  text-align: right;
+  margin-bottom: 45px;
+}
+
+.title {
+  color: #4d6f91;
+  font-size:33px;
+  font-weight:600;
+  margin-bottom:45px;
+}
+
+.footer-action {
+  text-align: center;
+  margin-top: 5%;
+}
+
+
+:host ::ng-deep .footer-action app-button button {
+  height: 78px !important;
+  width: 431px !important;
+}
+
+ngx-dropzone{
+    justify-content:center;
+}
+
+ngx-dropzone-label {
+  bottom: -20px;
+}
+
+
+@media screen and (max-width: 420px) {
+  :host ::ng-deep .footer-action app-button button{
+      width:100% !important;
+  }
+}
