@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'http://18.195.65.39:8080/api'
+  url: 'https://ec2-raw.hoolinova.com:8080/api'
 };
